@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 
 
-contract TeamTimeLockupWallet  is Initializable, OwnableUpgradeable {
+contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
     event Allocated(address indexed member, uint256 indexed amount, uint256 indexed releaseTimestamp);
     event Withdrawal(address indexed member, uint256 indexed amount);
     event Burn(address indexed member,  uint256 indexed amount, address to);
