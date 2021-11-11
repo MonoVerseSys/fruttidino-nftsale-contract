@@ -8,8 +8,9 @@ const writeConfig = (contractName, address) => {
   const filePath = path.join(__dirname, contractName, "_config.json");
   // console.log(filePath)
   let jsonData = fs.readFileSync(filePath, "utf8");
-  // console.log(jsonData)
+  console.log(jsonData);
   jsonData = jsonData.replace(/(?<=deployedAddress": ")[^"]+(?=")/gm, address);
+  console.log(jsonData);
   fs.writeFileSync(filePath, jsonData);
 };
 const deploy = async ({ contractName, deployPrams }) => {
