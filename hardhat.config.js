@@ -12,6 +12,8 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
+    console.log(account);
+
     console.log(account.address);
   }
 });
@@ -24,6 +26,10 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: "0.8.4",
+  optimizer: {
+    enabled: true,
+    runs: 1,
+  },
   networks: {
     bsctest: {
       url: `https://data-seed-prebsc-1-s1.binance.org:8545/`,

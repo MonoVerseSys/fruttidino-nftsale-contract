@@ -23,7 +23,7 @@ npx solhint 'contracts/**/*.sol' --fix
 ```
 
 ## deploy command
-hardhat.config.js 에 정의된 네트워크를 선택해서 명령어를 실행한다. ( --network rinkeby )
+hardhat.config.js 에 정의된 네트워크를 선택해서 명령어를 실행한다. ( --network bsctest )
 
 * FruttiDinoNFT
     ```

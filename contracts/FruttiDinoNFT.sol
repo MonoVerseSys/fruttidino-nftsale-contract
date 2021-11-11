@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-
+/**
+ * @title FruttiDinoNFT
+ * @author Ho Dong Kim
+ * @dev frutti dino nft v1
+ */
 contract FruttiDinoNFT is Initializable, ERC721EnumerableUpgradeable, OwnableUpgradeable {
     using CountersUpgradeable for CountersUpgradeable.Counter;
 
@@ -19,7 +22,7 @@ contract FruttiDinoNFT is Initializable, ERC721EnumerableUpgradeable, OwnableUpg
     function initialize(string memory __baseUri) public initializer {
         __Ownable_init();
         __ERC721Enumerable_init();
-        __ERC721_init("FruttiDino NFT", "FRTD");
+        __ERC721_init("FruttiDino NFT", "FTDT");
         setBaseURI(__baseUri);
     }
 
