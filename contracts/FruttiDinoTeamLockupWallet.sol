@@ -5,7 +5,11 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 
-
+/**
+ * @title Fruttidino Team - time lockup wallet
+ * @author Ho Dong Kim
+ * @dev The amount of fdt team supplies.
+ */
 contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
     event Allocated(address indexed member, uint256 indexed amount, uint256 indexed releaseTimestamp);
     event Withdrawal(address indexed member, uint256 indexed amount);
