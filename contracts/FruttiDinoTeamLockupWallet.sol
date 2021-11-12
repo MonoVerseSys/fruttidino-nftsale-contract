@@ -17,15 +17,17 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
 
 
     using AddressUpgradeable for address;
-    uint256 _allocAmount;
-    address _fdtAddress;
-
 
     struct AllocationInfo {
         uint256 amount;
         uint256 releaseTimestamp;
     }
-    mapping(address => AllocationInfo[]) _allocationInfos;
+    
+    uint256 _allocAmount; // storage1
+    address _fdtAddress; // storage2
+    mapping(address => AllocationInfo[]) _allocationInfos; // storage3
+
+
     function initialize(address fdtAddress) public initializer {
         __Ownable_init();
         setFdtAddress(fdtAddress);
@@ -160,5 +162,5 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
         return r;
     }
 
-
+    uint256[47] private __gap; // 50 - 3 = 47
 }
