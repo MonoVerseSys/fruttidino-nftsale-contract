@@ -56,6 +56,27 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
         emit Allocated(to, amount, releaseTimestamp);
     }
 
+    function multipleAllocation(address[] memory to, uint256[] memory amount, uint256[] memory releaseTimestamp) public onlyOwner {
+        require(to.length == amount.length && amount.length == releaseTimestamp.length, "data invalid");
+        uint256 curAllocation;
+        for(uint i = 0; i < amount.length; i++) {
+            curAllocation += amount[i];
+        }
+        bytes memory currentBalancePayload = abi.encodeWithSignature("balanceOf(address)", address(this));
+        bytes memory balanceResult = _fdtAddress.functionStaticCall(currentBalancePayload);
+        uint256 balance = abi.decode(balanceResult, (uint256));
+
+        require(_allocAmount + curAllocation <= balance, "contract balance is insufficient.");
+        _allocAmount += curAllocation;
+
+        for(uint i = 0; i < amount.length; i++) {
+            _allocationInfos[to[i]].push(
+                AllocationInfo(amount[i], releaseTimestamp[i])
+            );
+            emit Allocated(to[i], amount[i], releaseTimestamp[i]);
+        }
+    }
+
     function totalBalance(address member) public view returns(uint256) {
         AllocationInfo[] memory allocs = _allocationInfos[member];
         // block.timestamp
