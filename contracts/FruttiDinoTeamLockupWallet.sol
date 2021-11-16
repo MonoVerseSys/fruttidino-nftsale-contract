@@ -45,7 +45,7 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
         return block.timestamp;
     }
 
-    function _tokenBalance(address target) internal returns(uint256) {
+    function _tokenBalance(address target) internal view returns(uint256) {
         bytes memory currentBalancePayload = abi.encodeWithSignature("balanceOf(address)", target);
         bytes memory balanceResult = _fdtAddress.functionStaticCall(currentBalancePayload);
         uint256 balance = abi.decode(balanceResult, (uint256));
