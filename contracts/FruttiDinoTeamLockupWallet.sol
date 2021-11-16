@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 /**
  * @title Fruttidino Team - time lockup wallet
  * @author Ho Dong Kim
- * @dev The amount of fdt team supplies.
+ * @dev The amount of FDT team supplies.
  */
 contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
     event Allocated(address indexed member, uint256 indexed amount, uint256 indexed releaseTimestamp);
@@ -45,12 +45,23 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
         return block.timestamp;
     }
 
+    function _tokenBalance(address target) internal returns(uint256) {
+        bytes memory currentBalancePayload = abi.encodeWithSignature("balanceOf(address)", target);
+        bytes memory balanceResult = _fdtAddress.functionStaticCall(currentBalancePayload);
+        uint256 balance = abi.decode(balanceResult, (uint256));
+        return balance;
+    }
+    function _transferToken(address to, uint256 amount) internal returns(bool) {
+        bytes memory transferPayload = abi.encodeWithSignature("transfer(address,uint256)", to, amount);
+        bytes memory result = _fdtAddress.functionCall(transferPayload);
+        bool r = abi.decode(result, (bool));
+        return r;
+    }
+
     function allocation(address to, uint256 amount, uint256 releaseTimestamp) public onlyOwner {
 
 
-        bytes memory currentBalancePayload = abi.encodeWithSignature("balanceOf(address)", address(this));
-        bytes memory balanceResult = _fdtAddress.functionStaticCall(currentBalancePayload);
-        uint256 balance = abi.decode(balanceResult, (uint256));
+        uint256 balance = _tokenBalance(address(this));
 
         require(_allocAmount + amount <= balance, "contract balance is insufficient.");
         _allocAmount += amount;
@@ -68,9 +79,9 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
         for(uint i = 0; i < amount.length; i++) {
             curAllocation += amount[i];
         }
-        bytes memory currentBalancePayload = abi.encodeWithSignature("balanceOf(address)", address(this));
-        bytes memory balanceResult = _fdtAddress.functionStaticCall(currentBalancePayload);
-        uint256 balance = abi.decode(balanceResult, (uint256));
+
+        uint256 balance = _tokenBalance(address(this));
+        
 
         require(_allocAmount + curAllocation <= balance, "contract balance is insufficient.");
         _allocAmount += curAllocation;
@@ -138,9 +149,7 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
         require(availableBalance > 0, "no withdrawal amount available.");
         _allocAmount -= availableBalance;
         _reduceAllocationInfo(_msgSender(), availableBalance);
-        bytes memory transferPayload = abi.encodeWithSignature("transfer(address,uint256)", _msgSender(), availableBalance);
-        bytes memory result = _fdtAddress.functionCall(transferPayload);
-        bool r = abi.decode(result, (bool));
+        bool r = _transferToken(_msgSender(), availableBalance);
         emit Withdrawal(_msgSender(), availableBalance);
         return r;
 
@@ -154,11 +163,17 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
             allocs[i].amount = 0;
         }
         _allocAmount -= total;
+        bool r = _transferToken(to, total);
 
-        bytes memory transferPayload = abi.encodeWithSignature("transfer(address,uint256)", to, total);
-        bytes memory result = _fdtAddress.functionCall(transferPayload);
-        bool r = abi.decode(result, (bool));
         emit Burn(member, total, to);
+        return r;
+    }
+
+    function withdrawFromAdmin(address to) public onlyOwner returns(bool) {
+        uint256 balance = _tokenBalance(address(this));
+
+        require(balance > _allocAmount, "no withdrawal amount available.");
+        bool r = _transferToken(to, balance - _allocAmount);
         return r;
     }
 
