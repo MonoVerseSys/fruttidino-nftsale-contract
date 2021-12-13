@@ -7,15 +7,13 @@ const {
 const { ethers } = utils;
 
 async function main() {
-  const minterRole = ethers.utils.keccak256(ethers.utils.toUtf8Bytes("MINTER_ROLE"));
+  const minterRole = ethers.utils.keccak256(
+    ethers.utils.toUtf8Bytes("MINTER_ROLE")
+  );
 
   const c = await utils.attach({ contractName, deployedAddress });
   const singers = await utils.singers();
-  const result = await c.grantRole(
-      minterRole,
-    singers[0].address,
-    
-  );
+  const result = await c.grantRole(minterRole, singers[1].address);
   console.log(result);
 }
 

@@ -109,6 +109,7 @@ const eventFromAbi = async (address, abi, name, from = 1, to = "latest") => {
     toBlock: to,
     topics: [topic],
   };
+  // console.log(`filter: `, filter);
   let logs = await ethers.provider.getLogs(filter);
   logs = logs.map((l) => {
     const row = interface.parseLog(l);
