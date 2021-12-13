@@ -21,8 +21,10 @@
     "solidity-coverage": "^0.7.17"
   },
   "dependencies": {
+    "@fleekhq/fleek-storage-js": "^1.0.20",
     "@openzeppelin/contracts": "^4.3.2",
     "aws-sdk": "^2.1023.0",
+    "delay": "^5.0.0",
     "hdaddressgenerator": "^1.0.7",
     "sqs-consumer": "^5.6.0"
   }

@@ -12,9 +12,11 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
-    console.log(account);
+    // console.log(account);
 
-    console.log(account.address);
+    const balance = await ethers.provider.getBalance(account.address);
+
+    console.log(account.address, ethers.utils.formatEther(balance) + "eth");
   }
 });
 
@@ -33,6 +35,24 @@ module.exports = {
   networks: {
     bsctest: {
       url: `https://data-seed-prebsc-1-s1.binance.org:8545/`,
+      accounts: { mnemonic: mnemonic },
+      gas: 2100000,
+      gasPrice: "auto",
+    },
+    bsc: {
+      url: `https://data-seed-prebsc-1-s1.binance.org:8545/`,
+      accounts: { mnemonic: mnemonic },
+      gas: 2100000,
+      gasPrice: "auto",
+    },
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/${infuraKey}`,
+      accounts: { mnemonic: mnemonic },
+      gas: 2100000,
+      gasPrice: "auto",
+    },
+    eth: {
+      url: `https://mainnet.infura.io/v3/${infuraKey}`,
       accounts: { mnemonic: mnemonic },
       gas: 2100000,
       gasPrice: "auto",

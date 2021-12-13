@@ -3,29 +3,16 @@ const AWS = require("aws-sdk");
 AWS.config.update({
   accessKeyId: "AKIATTDOIGFNUO53JLAM",
   secretAccessKey: "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",
-  region: "ap-northeast-2",
+  region: "ap-southeast-1",
 });
 const sqs = new AWS.SQS();
 
 const params = {
-  MessageAttributes: {
-    Title: {
-      DataType: "String",
-      StringValue: "The Whistler",
-    },
-    Author: {
-      DataType: "String",
-      StringValue: "John Grisham",
-    },
-    WeeksOn: {
-      DataType: "Number",
-      StringValue: "6",
-    },
-  },
-  MessageBody:
-    "Information about current NY Times fiction bestseller for week of 12/11/2016.",
+  MessageBody: JSON.stringify({ a: "1", b: "10" }),
   QueueUrl:
-    "https://sqs.ap-northeast-2.amazonaws.com/247191843163/fruttidino_nft_sale",
+    "https://sqs.ap-southeast-1.amazonaws.com/247191843163/fdt-nft-event-testnet.fifo",
+  MessageGroupId: "test001",
+  MessageDeduplicationId: "uniq02",
 };
 
 sqs.sendMessage(params, function (err, data) {
