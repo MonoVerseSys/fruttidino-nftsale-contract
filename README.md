@@ -1,5 +1,19 @@
-# FruttiDino NFT Sale Project
+# FDT Address (BSC network)
+- token
+    https://bscscan.com/token/0x3a599e584075065eAAAc768D75EaEf85c2f2fF64
+- logic:
+    https://bscscan.com/address/0x342eACF6457b0C020F7FeC1D2Ef034414A9403Cd#code
 
+
+# FDT Team Wallet (BSC network)
+- address
+    0xE7c6C24a952Ec16eCf04153eE2285764616907F1
+
+- logic:
+    https://bscscan.com/address/0xe77556c70fbd77ed2ef4c10ac1516b356a322356#code
+
+
+# FruttiDino NFT Sale Project
 
 Try running some of the following tasks:
 
@@ -30,12 +44,31 @@ hardhat.config.js 에 정의된 네트워크를 선택해서 명령어를 실행
     npx hardhat run --network bsctest scripts/FruttiDinoNFT/deploy.js
     ```
 
+* FruttiDinoTeamLockupWallet
+    ```
+    npx hardhat run --network bsc scripts/FruttiDinoTeamLockupWallet/deploy.js
+    ```
+
+* FruttidinoBep20
+    ```
+    npx hardhat run --network bsc scripts/FruttidinoBep20/deploy.js
+    ```
+
+
+
 ## etherscan verify 예
 
 ```
-npx hardhat verify --contract  contracts/FruttiDinoNFT.sol:FruttiDinoNFT 0x1B7c88FB3e14a148C7cdF329C72fa1A86409c644  --network bsctest
+npx hardhat verify --contract  contracts/FruttidinoBep20.sol:FruttidinoBep20 0x342eACF6457b0C020F7FeC1D2Ef034414A9403Cd  --network bsc
 ```
 
+```
+npx hardhat verify --contract  contracts/FruttiDinoTeamLockupWallet.sol:FruttiDinoTeamLockupWallet 0xe77556c70fbd77ed2ef4c10ac1516b356a322356  --network bsc
+```
+
+
+<!-- npx hardhat verify --contract  node_modules/@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol:TransparentUpgradeableProxy 0xBbc4424eBEf5a9a54abCa54dC2624748a0d47517  --network bsc
+ -->
 
 # Etherscan verification
 

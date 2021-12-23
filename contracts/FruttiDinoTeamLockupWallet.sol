@@ -177,5 +177,5 @@ contract FruttiDinoTeamLockupWallet  is Initializable, OwnableUpgradeable {
         return r;
     }
 
-    uint256[47] private __gap; // 50 - 3 = 47
+    // uint256[47] private __gap; // 50 - 3 = 47
 }

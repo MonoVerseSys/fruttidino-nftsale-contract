@@ -11,10 +11,10 @@ async function main() {
     ethers.utils.toUtf8Bytes("MINTER_ROLE")
   );
 
-  const c = await utils.attach({ contractName, deployedAddress });
-  const singers = await utils.singers();
-  const result = await c.grantRole(minterRole, singers[0].address);
-  console.log(result);
+  // const c = await utils.attach({ contractName, deployedAddress });
+  // const singers = await utils.singers();
+  // const result = await c.grantRole(minterRole, '0x677d8a47D009227368b96BeB98c7d7a9123E1FE0');
+  // console.log(result);
 }
 
 main()

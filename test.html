@@ -1,0 +1,29 @@
+<html>
+    <header>
+    </header>
+    <body>
+
+
+
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js" ></script>
+
+    <script>
+
+        const ethEnabled = async () => {
+            if (window.ethereum) {
+                await window.ethereum.send('eth_requestAccounts');
+                window.web3 = new Web3(window.ethereum);
+                return true;
+            }
+            return false;
+        }
+
+        $(async function() {
+            const a = await ethEnabled();
+            console.log(a);
+            
+        });
+    </script>
+</html>

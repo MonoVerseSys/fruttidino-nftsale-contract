@@ -7,7 +7,9 @@ typechain
 #Hardhat files
 cache
 artifacts
-secrets.json
 .DS_Store
 
 test
+
+
+secrets*.json

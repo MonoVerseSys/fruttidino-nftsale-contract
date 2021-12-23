@@ -5,12 +5,10 @@ const {
   deployPrams,
 } = require("./_config.json");
 
-const {
-  deployedAddress: fdtAddress,
-} = require("../FruttidinoBep20/_config.json");
-
 async function main() {
-  await utils.deployProxy({ contractName, deployPrams: [fdtAddress] });
+  
+  const result = await utils.upgradeProxy({ deployedAddress, contractName });
+  console.log(result);
 }
 
 main()

@@ -1,19 +1,22 @@
 const utils = require("../utils");
+const BigNumber = require("bignumber.js");
 const {
   contractName,
   deployedAddress,
   deployPrams,
 } = require("./_config.json");
-const { ethers } = utils;
 
 async function main() {
-  const minterRole = ethers.utils.keccak256(
-    ethers.utils.toUtf8Bytes("MINTER_ROLE")
-  );
+  const fromIdx = 0;
+  const toIdx = 1;
 
   const c = await utils.attach({ contractName, deployedAddress });
-  const singers = await utils.singers();
-  const result = await c.grantRole(minterRole, singers[0].address);
+  // const [c] = await utils.connectToSigner(_c, fromIdx);
+  const signers = await utils.singers();
+  const fromS = signers[fromIdx];
+  const toS = signers[toIdx];
+
+  const result = await c.transferFrom(fromS.address, toS.address, 217);
   console.log(result);
 }
 

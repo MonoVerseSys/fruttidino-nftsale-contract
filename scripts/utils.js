@@ -1,6 +1,7 @@
 const { ethers, upgrades } = require("hardhat");
 const fs = require("fs");
 const path = require("path");
+
 const BigNumber = ethers.BigNumber;
 
 const writeConfig = (contractName, address) => {
