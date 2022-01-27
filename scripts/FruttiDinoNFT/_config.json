@@ -1,5 +1,5 @@
 {
     "contractName": "FruttiDinoNFT",
-    "deployedAddress": "0x8bA94879276D6859e68dE19eB4009e77A3657312",
-    "deployPrams": ["https://api.fruttidino.com/v1/nft/properties/"]
+    "deployedAddress": "0x60bA8Ed7cbE095FE7f47b4a70C1d92a2878DAE71",
+    "deployPrams": []
 }

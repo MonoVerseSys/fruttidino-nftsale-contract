@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 /**
  * @title FruttiDinoNFT
- * @author Ho Dong Kim
+ * @author Ho Dong Kim (monoverse.io)
  * @dev frutti dino nft v1
  */
 contract FruttiDinoNFT is Initializable, OwnableUpgradeable, AccessControlUpgradeable, ERC721EnumerableUpgradeable {
@@ -20,12 +20,13 @@ contract FruttiDinoNFT is Initializable, OwnableUpgradeable, AccessControlUpgrad
     string private _baseUri;
     mapping(string => uint256) private _dinoIds;// key : dino, value : token id
 
-    function initialize(string memory __baseUri) public initializer {
+    function initialize() public initializer {
         __Ownable_init();
         __ERC721Enumerable_init();
         __ERC721_init("FruttiDino NFT", "FTDT");
-        setBaseURI(__baseUri);
+        setBaseURI("https://api.fruttidino.com/dino/");
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _setupRole(MINTER_ROLE, msg.sender);
     }
 
     function supportsInterface(bytes4 interfaceId) public view virtual

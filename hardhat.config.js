@@ -16,7 +16,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
     const balance = await ethers.provider.getBalance(account.address);
 
-    console.log(account.address, ethers.utils.formatEther(balance) + "eth");
+    console.log(account.address, ethers.utils.formatEther(balance) + "bnb");
   }
 });
 

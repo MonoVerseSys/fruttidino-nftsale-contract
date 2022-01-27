@@ -33,6 +33,7 @@ const deployProxy = async ({ contractName, deployPrams }) => {
   writeConfig(contractName, result.address);
 };
 
+
 const upgradeProxy = async ({ deployedAddress, contractName }) => {
   const C = await ethers.getContractFactory(contractName);
   const c = await upgrades.upgradeProxy(deployedAddress, C);
@@ -52,6 +53,13 @@ const singers = async () => {
 
   return list;
 };
+
+const connectToWallet = async (contractObject, prv) => {
+  const wallet = new ethers.Wallet(prv, ethers.provider);
+  const c = contractObject.connect(wallet);
+  return [c, wallet];
+
+}
 
 const connectToSigner = async (contractObject, index) => {
   const s = await singers();
@@ -149,5 +157,6 @@ module.exports = {
   singers,
   ethers,
   connectToSigner,
+  connectToWallet,
   eventFromAbi,
 };

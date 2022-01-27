@@ -5,6 +5,13 @@
     https://bscscan.com/address/0x342eACF6457b0C020F7FeC1D2Ef034414A9403Cd#code
 
 
+# FDT NFT
+- address
+    0x60bA8Ed7cbE095FE7f47b4a70C1d92a2878DAE71
+
+- logic:
+    https://bscscan.com/address/0x4fb32e9bc92c0a3138a7ce4ed88230ce2945d3b5#code
+
 # FDT Team Wallet (BSC network)
 - address
     0xE7c6C24a952Ec16eCf04153eE2285764616907F1
@@ -41,7 +48,7 @@ hardhat.config.js 에 정의된 네트워크를 선택해서 명령어를 실행
 
 * FruttiDinoNFT
     ```
-    npx hardhat run --network bsctest scripts/FruttiDinoNFT/deploy.js
+    npx hardhat run --network bsc scripts/FruttiDinoNFT/deploy.js
     ```
 
 * FruttiDinoTeamLockupWallet
@@ -63,7 +70,7 @@ npx hardhat verify --contract  contracts/FruttidinoBep20.sol:FruttidinoBep20 0x3
 ```
 
 ```
-npx hardhat verify --contract  contracts/FruttiDinoTeamLockupWallet.sol:FruttiDinoTeamLockupWallet 0xe77556c70fbd77ed2ef4c10ac1516b356a322356  --network bsc
+npx hardhat verify --contract  contracts/FruttiDinoNFT.sol:FruttiDinoNFT 0x4fb32e9bc92c0a3138a7ce4ed88230ce2945d3b5  --network bsc
 ```
 
 
