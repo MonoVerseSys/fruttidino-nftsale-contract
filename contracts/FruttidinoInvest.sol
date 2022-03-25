@@ -55,19 +55,25 @@ contract FruttidinoInvest is Context {
         SafeERC20.safeTransfer(IERC20(tokenAddress()), beneficiary(), releasable);
     }
 
+    function totalAllocation() public view returns (uint256) {
+        return IERC20(tokenAddress()).balanceOf(address(this)) + released();
+    }
+    
     function vestedAmount(uint64 timestamp) public view returns (uint256) {
-        return _vestingSchedule(IERC20(tokenAddress()).balanceOf(address(this)) + released(), timestamp);
+        return _vestingSchedule(totalAllocation(), timestamp);
     }
 
 
-    function _vestingSchedule(uint256 totalAllocation, uint64 timestamp) internal view returns (uint256) {
+    function _vestingSchedule(uint256 _totalAllocation, uint64 timestamp) internal view returns (uint256) {
         if (timestamp < start()) {
             return 0;
         } else if (timestamp > start() + duration()) {
-            return totalAllocation;
+            return _totalAllocation;
         } else {
-            return (totalAllocation * (timestamp - start())) / duration();
+            return (_totalAllocation * (timestamp - start())) / duration();
         }
     }
+
+    
 
 }

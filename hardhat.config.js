@@ -4,7 +4,7 @@ require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
 require("hardhat-gas-reporter");
 require("solidity-coverage");
-const { infuraKey, mnemonic, etherScanKey } = require("./secrets.json");
+const { infuraKey, mnemonic, mnemonicMultiTransfer, etherScanKey } = require("./secrets.json");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -18,7 +18,18 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
     console.log(account.address, ethers.utils.formatEther(balance) + "bnb");
   }
-});
+})
+
+task("transfer", "transfer bnb", async (taskArgs, hre) => {
+  const accounts = await hre.ethers.getSigners();
+
+  const txObj = await accounts[0].sendTransaction({
+    to: '0x4341DEAa6f4321C11845d9c282Cc3130624bE112',
+    value: hre.ethers.utils.parseEther('0.5')
+  });
+  console.log(txObj);
+
+})
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -35,16 +46,19 @@ module.exports = {
   networks: {
     bsctest: {
       url: `https://data-seed-prebsc-1-s1.binance.org:8545/`,
+      // accounts: { mnemonic: mnemonicMultiTransfer },
       accounts: { mnemonic: mnemonic },
       gas: 2100000,
       gasPrice: "auto",
     },
     bsc: {
       url: `https://bsc-dataseed.binance.org/`,
+      // accounts: { mnemonic: mnemonicMultiTransfer },
       accounts: { mnemonic: mnemonic },
       gas: 2100000,
       gasPrice: "auto",
     },
+    
     rinkeby: {
       url: `https://rinkeby.infura.io/v3/${infuraKey}`,
       accounts: { mnemonic: mnemonic },

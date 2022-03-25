@@ -15,8 +15,10 @@ const writeConfig = (contractName, address) => {
   fs.writeFileSync(filePath, jsonData);
 };
 const deploy = async ({ contractName, deployPrams }) => {
+  
   const C = await ethers.getContractFactory(contractName);
-  const c = await C.deploy(deployPrams);
+  console.log(C.deploy)
+  const c = await C.deploy.apply(C, deployPrams);
 
   const result = await c.deployed();
   console.log(`deployed result ${contractName}:`, result, result.address);
