@@ -4,8 +4,8 @@ require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
 require("hardhat-gas-reporter");
 require("solidity-coverage");
-const { infuraKey, mnemonic, mnemonicMultiTransfer, etherScanKey } = require("./secrets.json");
-
+const { infuraKey, mnemonic, mnemonicMultiTransfer, etherScanKey, mnemonicBridgeOwner } = require("./secrets.json");
+// fdt deploy mnemonicBridgeOwner
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
@@ -24,7 +24,7 @@ task("transfer", "transfer bnb", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   const txObj = await accounts[0].sendTransaction({
-    to: '0x4341DEAa6f4321C11845d9c282Cc3130624bE112',
+    to: '0x77A94De39C859cb4D3a667130A91337d39a9DE82',
     value: hre.ethers.utils.parseEther('0.5')
   });
   console.log(txObj);
@@ -54,7 +54,7 @@ module.exports = {
     bsc: {
       url: `https://bsc-dataseed.binance.org/`,
       // accounts: { mnemonic: mnemonicMultiTransfer },
-      accounts: { mnemonic: mnemonic },
+      accounts: { mnemonic: mnemonicBridgeOwner },
       gas: 2100000,
       gasPrice: "auto",
     },
