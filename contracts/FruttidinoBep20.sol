@@ -3,9 +3,13 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20BurnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
+import "./interface/IERC1363.sol";
+import "./interface/IERC1363Receiver.sol";
+import "./interface/IERC1363Spender.sol";
 
-
-contract FruttidinoBep20 is Initializable, ERC20BurnableUpgradeable,  AccessControlUpgradeable {
+contract FruttidinoBep20 is Initializable, ERC20BurnableUpgradeable,  AccessControlUpgradeable, ERC1363 {
+    using AddressUpgradeable for address;
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant LOCK_ROLE = keccak256("LOCK_ROLE");
     uint256 private _cap;
@@ -63,4 +67,103 @@ contract FruttidinoBep20 is Initializable, ERC20BurnableUpgradeable,  AccessCont
         require(ERC20Upgradeable.totalSupply() + amount <= cap(), "ERC20Capped: cap exceeded");
         super._mint(account, amount);
     }
+
+    
+    function transferAndCall(address to, uint256 amount) public virtual override returns (bool) {
+        return transferAndCall(to, amount, "");
+    }
+
+    function transferAndCall(
+        address to,
+        uint256 amount,
+        bytes memory data
+    ) public virtual override returns (bool) {
+        transfer(to, amount);
+        require(_checkOnTransferReceived(_msgSender(), to, amount, data), "ERC1363: receiver returned wrong data");
+        return true;
+    }
+
+    function transferFromAndCall(
+        address from,
+        address to,
+        uint256 amount
+    ) public virtual override returns (bool) {
+        return transferFromAndCall(from, to, amount, "");
+    }
+
+    function transferFromAndCall(
+        address from,
+        address to,
+        uint256 amount,
+        bytes memory data
+    ) public virtual override returns (bool) {
+        transferFrom(from, to, amount);
+        require(_checkOnTransferReceived(from, to, amount, data), "ERC1363: receiver returned wrong data");
+        return true;
+    }
+
+    function approveAndCall(address spender, uint256 amount) public virtual override returns (bool) {
+        return approveAndCall(spender, amount, "");
+    }
+
+  
+    function approveAndCall(
+        address spender,
+        uint256 amount,
+        bytes memory data
+    ) public virtual override returns (bool) {
+        approve(spender, amount);
+        require(_checkOnApprovalReceived(spender, amount, data), "ERC1363: spender returned wrong data");
+        return true;
+    }
+
+
+    function _checkOnTransferReceived(
+        address sender,
+        address recipient,
+        uint256 amount,
+        bytes memory data
+    ) internal virtual returns (bool) {
+        if (!recipient.isContract()) {
+            revert("ERC1363: transfer to non contract address");
+        }
+
+        try ERC1363Receiver(recipient).onTransferReceived(_msgSender(), sender, amount, data) returns (bytes4 retval) {
+            return retval == ERC1363Receiver.onTransferReceived.selector;
+        } catch (bytes memory reason) {
+            if (reason.length == 0) {
+                revert("ERC1363: transfer to non ERC1363Receiver implementer");
+            } else {
+                /// @solidity memory-safe-assembly
+                assembly {
+                    revert(add(32, reason), mload(reason))
+                }
+            }
+        }
+    }
+
+
+    function _checkOnApprovalReceived(
+        address spender,
+        uint256 amount,
+        bytes memory data
+    ) internal virtual returns (bool) {
+        if (!spender.isContract()) {
+            revert("ERC1363: approve a non contract address");
+        }
+
+        try ERC1363Spender(spender).onApprovalReceived(_msgSender(), amount, data) returns (bytes4 retval) {
+            return retval == ERC1363Spender.onApprovalReceived.selector;
+        } catch (bytes memory reason) {
+            if (reason.length == 0) {
+                revert("ERC1363: approve a non ERC1363Spender implementer");
+            } else {
+                /// @solidity memory-safe-assembly
+                assembly {
+                    revert(add(32, reason), mload(reason))
+                }
+            }
+        }
+    }
+
 }

@@ -7,13 +7,14 @@ const {
 
 async function main() {
   const c = await utils.attach({ contractName, deployedAddress });
-  const singers = await utils.singers();
-  
-  const result = await c.mintDino(
-    singers[0].address,
-    2,
-    "kkaf2c49-168c-4da9-9d99-0ddf8fa70cz2"
-  );
+  const amount = utils.ethers.utils.parseEther('4029').toString()
+  const bulkTransferCa = '0x1cAdb7e0f17DF0CCC668757bf3a43b8582F5F526'
+
+  console.log(amount)
+  const result = await c.approve(
+    bulkTransferCa,
+    amount
+  );  // bulk transfer contract에 권한을 준다 .
   console.log(result);
 }
 

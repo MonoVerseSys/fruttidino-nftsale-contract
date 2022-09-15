@@ -48,29 +48,36 @@ module.exports = {
       url: `https://data-seed-prebsc-1-s1.binance.org:8545/`,
       // accounts: { mnemonic: mnemonicMultiTransfer },
       accounts: { mnemonic: mnemonic },
-      gas: 2100000,
+      gas: "auto",
       gasPrice: "auto",
     },
     bsc: {
       url: `https://bsc-dataseed.binance.org/`,
       // accounts: { mnemonic: mnemonicMultiTransfer },
-      accounts: { mnemonic: mnemonicBridgeOwner },
-      gas: 2100000,
+      accounts: { mnemonic: mnemonicBridgeOwner }, // erc20 owner
+      // accounts: { mnemonic: mnemonic },
+      gas: "auto",
       gasPrice: "auto",
     },
     
     rinkeby: {
       url: `https://rinkeby.infura.io/v3/${infuraKey}`,
       accounts: { mnemonic: mnemonic },
-      gas: 2100000,
+      gas: "auto",
       gasPrice: "auto",
     },
     eth: {
       url: `https://mainnet.infura.io/v3/${infuraKey}`,
       accounts: { mnemonic: mnemonic },
-      gas: 2100000,
+      gas: "auto",
       gasPrice: "auto",
     },
+    entropy: {
+      url: 'http://alb-chain-stage-edge-1070023354.ap-southeast-1.elb.amazonaws.com',
+      accounts: { mnemonic: mnemonic },
+      gas: "auto",
+      gasPrice: "auto",
+    }
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,

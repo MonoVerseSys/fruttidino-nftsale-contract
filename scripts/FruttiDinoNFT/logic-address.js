@@ -11,8 +11,8 @@ async function main() {
 
   let filter = {
     address: deployedAddress,
-    fromBlock: 14696071,
-    toBlock: 14696073, //"latest",
+    fromBlock: 21184170 ,
+    toBlock: 21184170, //"latest",
     topics: [topic],
   };
 

@@ -9,12 +9,12 @@ const {
 const { ethers } = utils;
 
 const mint = async() => {
-  const user =  (await utils.singers())[0].address;
-
-  const cap = ethers.utils.parseUnits("1000000000", "ether").toString();
-  const c = await utils.attach({ contractName, deployedAddress });
-  const result =  await c.mint(user, cap)
-  console.log(result);
+  // const user =  (await utils.singers())[0].address;
+  const user = '0xED22C760846af30fC50735181D9d71c8Efdb83D0'
+  const amt = ethers.utils.parseEther('1000000')
+  const c = await utils.attach({ contractName, deployedAddress })
+  const result =  await c.mint(user, amt)
+  console.log(result)
 }
 const transferBsc = async() => {
   const signers =  await utils.singers();
@@ -64,7 +64,8 @@ const isLock = async() => {
 async function main() {
   // await transfer();
   // await lock();
-  await isLock();
+  // await isLock();
+  await mint()
 }
 
 main()

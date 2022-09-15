@@ -11,7 +11,7 @@ const minterRole = ethers.utils.keccak256(
     ethers.utils.toUtf8Bytes("MINTER_ROLE")
   );
   const c = await utils.attach({ contractName, deployedAddress });
-  const result = await c.tokenURI(140);
+  const result = await c.tokenURI(1);
   console.log(result);
 
   // const result2 = await c.tokenIdFromDinoId("00af2c49-168c-4da9-9d99-0ddf8fa70c6bdd");

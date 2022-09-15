@@ -20,7 +20,7 @@ async function main() {
   // console.log(utils.connectToWallet)
   // const [c, wallet] = await utils.connectToWallet(_c, '')
   // console.log(wallet)
-  const result = await c.transferFrom(address, '0x632Acfe95C474d944d35f6a147B19b6ff59C0d9f', 3015)
+  const result = await c.transferFrom(address, '0xc4b85b9bdd9a4bcc3e8f4522f0e4253fdfff21dc', 3015)
 
   // const result = await c.transferFrom(fromS.address, toS.address, 217);
   console.log(result);

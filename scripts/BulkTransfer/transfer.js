@@ -7,8 +7,16 @@ const {
 
 async function main() {
   const c = await utils.attach({ contractName, deployedAddress });
-  const result = await c.multipleMintToSelf(
-    ['a', 'b', 'c', 'd', 'e']
+  const dinoIds = []
+  const senders = []
+  const receivers = []
+  for(let i=3847;i<3847+20;i++) {
+    senders.push()
+    dinoIds.push(i)
+  }
+  console.log(dinoIds.length)
+  const result = await c.multipleTransfer(
+    dinoIds
   );
   console.log(result);
 }

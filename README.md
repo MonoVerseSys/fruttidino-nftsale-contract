@@ -78,6 +78,9 @@ npx hardhat verify --contract  contracts/FruttidinoInvest.sol:FruttidinoInvest 0
 npx hardhat verify --contract  contracts/FruttiDinoNFT.sol:FruttiDinoNFT 0x4fb32e9bc92c0a3138a7ce4ed88230ce2945d3b5  --network bsc
 ```
 
+```
+npx hardhat verify --contract  contracts/FruttidinoBep20.sol:FruttidinoBep20 0x3427ceda1514e23E54dD22703F4b8c0037c9E4E2 --network bsc
+```
 
 <!-- npx hardhat verify --contract  node_modules/@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol:TransparentUpgradeableProxy 0xBbc4424eBEf5a9a54abCa54dC2624748a0d47517  --network bsc
  -->

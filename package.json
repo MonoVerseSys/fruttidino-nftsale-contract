@@ -29,6 +29,7 @@
     "delay": "^5.0.0",
     "hdaddressgenerator": "^1.0.7",
     "moment": "^2.29.1",
-    "sqs-consumer": "^5.6.0"
+    "sqs-consumer": "^5.6.0",
+    "uuid": "^8.3.2"
   }
 }
