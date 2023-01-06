@@ -13,14 +13,13 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
  */
 contract FruttiDinoNFT is Initializable, OwnableUpgradeable, AccessControlUpgradeable, ERC721EnumerableUpgradeable {
     using CountersUpgradeable for CountersUpgradeable.Counter;
-    event MintDino(address indexed to, uint256 indexed tokenId);
+    event MintDino(address indexed to, uint256 indexed tokenId, string dinoId);
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    CountersUpgradeable.Counter private _tokenIds; // deprecated
+    CountersUpgradeable.Counter private _tokenIds;
     string private _baseUri;
-    mapping(string => uint256) private _dinoIds;// deprecated
-    uint256 private  _latestTokenId;
-    
+    mapping(string => uint256) private _dinoIds;// key : dino, value : token id
+
     function initialize() public initializer {
         __Ownable_init();
         __ERC721Enumerable_init();
@@ -32,7 +31,7 @@ contract FruttiDinoNFT is Initializable, OwnableUpgradeable, AccessControlUpgrad
 
     function supportsInterface(bytes4 interfaceId) public view virtual
         override(AccessControlUpgradeable, ERC721EnumerableUpgradeable) returns (bool) {
-        return interfaceId == type(IERC165Upgradeable).interfaceId;
+        return super.supportsInterface(interfaceId);
     }
 
     function setBaseURI(string memory base) public onlyOwner {
@@ -43,36 +42,37 @@ contract FruttiDinoNFT is Initializable, OwnableUpgradeable, AccessControlUpgrad
         return _baseUri;
     }
 
-
-    function getLatestTokenId() public view returns(uint256) {
-        return _latestTokenId;
+    function tokenIdFromDinoId(string memory dinoId) public view returns(uint256) {
+        return _dinoIds[dinoId];
     }
 
 
-    function mintDino(address player, uint256 nftId)
+    function mintDino(address player, string memory dinoId)
         public onlyRole(MINTER_ROLE)
+        returns (uint256)
     {
-        require(!_exists(nftId), "It already exists (nft id)");
-        // _tokenIds.increment();
+        require(tokenIdFromDinoId(dinoId) == 0, "It already exists");
+        _tokenIds.increment();
 
-        // uint256 newItemId = _tokenIds.current();
-        _mint(player, nftId);
-        // _dinoIds[dinoId] = nftId;
-        _latestTokenId = nftId;
-        emit MintDino(player, nftId);
+        uint256 newItemId = _tokenIds.current();
+        _mint(player, newItemId);
+        _dinoIds[dinoId] = newItemId;
+        emit MintDino(player, newItemId, dinoId);
+        return newItemId;
     }
 
-    function batchMintDino(address[] memory players, uint256[] memory nftIds) public {
-        uint256 dataLen = players.length;
-        require(dataLen > 0, "data length must be greater than zero");
-        require(dataLen == nftIds.length, "invalid params");
-        for(uint256 i=0; i<dataLen; i++) {
-            mintDino(players[i], nftIds[i]);
-        }
+    function mint(address player, uint256 tokenId, string memory dinoId)
+        public onlyRole(MINTER_ROLE)
+        returns (uint256)
+    {
+        require(tokenIdFromDinoId(dinoId) == 0, "It already exists");
+        _tokenIds.increment();
+        _mint(player, tokenId);
+        _dinoIds[dinoId] = tokenId;
+        emit MintDino(player, tokenId, dinoId);
+        return tokenId;
     }
 
-    function burn(uint256 tokenId) external {
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721Burnable: caller is not owner nor approved");
-        _burn(tokenId);
-    }
+
+    uint256[46] private __gap;
 }
