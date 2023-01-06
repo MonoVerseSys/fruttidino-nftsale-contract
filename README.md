@@ -10,8 +10,10 @@
     0x60bA8Ed7cbE095FE7f47b4a70C1d92a2878DAE71
 
 - logic:
-    https://bscscan.com/address/0x4fb32e9bc92c0a3138a7ce4ed88230ce2945d3b5#code
+    https://bscscan.com/address/0xb81bfbe19b3dc649781e0e0be3971298b2a6d445#code
 
+- bsctestnet 
+    0xa47A271B61d77f5a2aC69D29b0FC6d75f909bcDa
 # FDT Team Wallet (BSC network)
 - address
     0xE7c6C24a952Ec16eCf04153eE2285764616907F1
@@ -75,7 +77,7 @@ npx hardhat verify --contract  contracts/FruttidinoInvest.sol:FruttidinoInvest 0
 ```
 
 ```
-npx hardhat verify --contract  contracts/FruttiDinoNFT.sol:FruttiDinoNFT 0x4fb32e9bc92c0a3138a7ce4ed88230ce2945d3b5  --network bsc
+npx hardhat verify --contract  contracts/FruttiDinoNFT.sol:FruttiDinoNFT 0x0CAA268b0Af11e95F75F562FcbCD27DA79862D21  --network bsc
 ```
 
 ```
