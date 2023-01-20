@@ -36,8 +36,8 @@ async function main() {
   // const rol2 =  await c.hasRole(minterRole, '0x677d8a47D009227368b96BeB98c7d7a9123E1FE0')
   // console.log(`rol2, ${rol2}`)
 
-  const a = await c.ownerOf(3015)
-  console.log('own of ', a)
+  // const a = await c.ownerOf(3015)
+  // console.log('own of ', a)
 
 }
 

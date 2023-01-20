@@ -68,8 +68,8 @@ module.exports = {
       // url: 'https://rpc.ankr.com/bsc',
       // url: 'https://bscrpc.com',
       // accounts: { mnemonic: mnemonicMultiTransfer },
-      accounts: { mnemonic: mnemonicBridgeOwner }, // erc20 owner
-      // accounts: { mnemonic: mnemonic }, // nft owner
+      // accounts: { mnemonic: mnemonicBridgeOwner }, // erc20 owner
+      accounts: { mnemonic: mnemonic }, // nft owner
       // accounts: { mnemonic: hodongM },
       gas: "auto",
       gasPrice: "auto",

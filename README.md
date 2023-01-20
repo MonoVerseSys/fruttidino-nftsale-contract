@@ -83,7 +83,9 @@ npx hardhat verify --contract  contracts/FruttiDinoNFT.sol:FruttiDinoNFT 0x0CAA2
 ```
 npx hardhat verify --contract  contracts/FruttidinoBep20.sol:FruttidinoBep20 0x3427ceda1514e23E54dD22703F4b8c0037c9E4E2 --network bsc
 ```
-
+```
+npx hardhat verify --contract  contracts/FruttidinoFamNFT.sol:FruttidinoFamNFT 0x6d1592471c81F3332Bb7652FD52559fCdB452f27  --network bsc
+```
 <!-- npx hardhat verify --contract  node_modules/@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol:TransparentUpgradeableProxy 0xBbc4424eBEf5a9a54abCa54dC2624748a0d47517  --network bsc
  -->
 

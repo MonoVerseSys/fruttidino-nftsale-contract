@@ -25,28 +25,34 @@ async function main() {
     // '0xa0eb2bf835d99abee1ec0cdf4de9fe16d35c21cc',
     // '0x38b43b8aa04d79a74bb574628d96e0c28d370ab2',
   ]
-  do {
+  // do {
     
-    try {
+  //   try {
 
-      for(let i=1;i<=20;i++) {
-        const tx = await c.mint(
-          target[run],
-          i,
-          v4()
-        );
-          console.log(tx)
-          const receipt = await tx.wait()
-          console.log(receipt, '-->', i)
+  //     for(let i=1;i<=20;i++) {
+  //       const tx = await c.mint(
+  //         target[run],
+  //         i,
+  //         v4()
+  //       );
+  //         console.log(tx)
+  //         const receipt = await tx.wait()
+  //         console.log(receipt, '-->', i)
           
-      }
-      run++
-    } catch(e) {
-      console.error(e)
-    }
+  //     }
+  //     run++
+  //   } catch(e) {
+  //     console.error(e)
+  //   }
     
-  } while(run < target.length)
+  // } while(run < target.length)
   
+  const tx = await c.mintDino(
+    '0x5d96871E4e958DEf47088c00F45bA2a34a7e82c1',
+    v4()
+  );
+
+
     
   
   // console.log(result);
