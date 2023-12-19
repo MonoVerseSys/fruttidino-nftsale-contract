@@ -31,16 +31,16 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   }
 })
 
-task("transfer", "transfer bnb", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
+// task("transfer", "transfer bnb", async (taskArgs, hre) => {
+//   const accounts = await hre.ethers.getSigners();
 
-  const txObj = await accounts[0].sendTransaction({
-    to: '0x6fF19028DC69c40ca87e2f15D9B3945b9E81F8aa',
-    value: hre.ethers.utils.parseEther('0.02')
-  });
-  console.log(txObj);
+//   const txObj = await accounts[0].sendTransaction({
+//     to: '0x6fF19028DC69c40ca87e2f15D9B3945b9E81F8aa',
+//     value: hre.ethers.utils.parseEther('0.02')
+//   });
+//   console.log(txObj);
 
-})
+// })
 //0xfe64b87d38f6d24a98ea668148ac9b0653d04547
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -57,7 +57,7 @@ module.exports = {
   networks: {
     bsctest: {
       url: `https://data-seed-prebsc-1-s3.binance.org:8545/`,
-      // url : `https://data-seed-prebsc-1-s1.binance.org:8545`,
+      // url : `https://rpc.ankr.com/bsc_testnet_chapel`,
       // accounts: { mnemonic: mnemonicMultiTransfer },
       accounts: { mnemonic: mnemonic }, 
       gas: "auto",
