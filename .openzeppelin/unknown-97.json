@@ -84,6 +84,11 @@
       "address": "0x3A0cE32526086d1740c97035A22958e5a9E541e7",
       "txHash": "0x38480e7b88076bf270a6e5662b5831eb9e6f020e64c5e1c9e10584085781abb8",
       "kind": "transparent"
+    },
+    {
+      "address": "0xc69a9bC94007DE9C58c4Bb622B51D892DeF912dB",
+      "txHash": "0x14af37c04d5cf3c9558bef11b6d866baf0c0428750c9ffe554992408325b0411",
+      "kind": "transparent"
     }
   ],
   "impls": {
@@ -1220,6 +1225,98 @@
           },
           "t_array(t_uint256)50_storage": {
             "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "3e00e9109cb32e984346bb1395ff39993a1700199b2369574f93411b715f5158": {
+      "address": "0x713568db3414594E34d29D8aD634972Af506A448",
+      "txHash": "0x8f6b5c24cea2f5535eafdaae4bcd62455c81a782276f8c04c272afc043e8f576",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:26"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:30"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:21"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:77"
+          },
+          {
+            "contract": "FruttiDinoTeamLockupWallet",
+            "label": "_allocAmount",
+            "type": "t_uint256",
+            "src": "contracts/FruttiDinoTeamLockupWallet.sol:26"
+          },
+          {
+            "contract": "FruttiDinoTeamLockupWallet",
+            "label": "_fdtAddress",
+            "type": "t_address",
+            "src": "contracts/FruttiDinoTeamLockupWallet.sol:27"
+          },
+          {
+            "contract": "FruttiDinoTeamLockupWallet",
+            "label": "_allocationInfos",
+            "type": "t_mapping(t_address,t_array(t_struct(AllocationInfo)499_storage)dyn_storage)",
+            "src": "contracts/FruttiDinoTeamLockupWallet.sol:28"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_mapping(t_address,t_array(t_struct(AllocationInfo)499_storage)dyn_storage)": {
+            "label": "mapping(address => struct FruttiDinoTeamLockupWallet.AllocationInfo[])"
+          },
+          "t_array(t_struct(AllocationInfo)499_storage)dyn_storage": {
+            "label": "struct FruttiDinoTeamLockupWallet.AllocationInfo[]"
+          },
+          "t_struct(AllocationInfo)499_storage": {
+            "label": "struct FruttiDinoTeamLockupWallet.AllocationInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256"
+              },
+              {
+                "label": "releaseTimestamp",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
           }
         }
       }
